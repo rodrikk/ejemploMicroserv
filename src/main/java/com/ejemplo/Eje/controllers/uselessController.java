@@ -2,12 +2,15 @@ package com.ejemplo.Eje.controllers;
 
 import com.ejemplo.Eje.models.useless;
 import com.ejemplo.Eje.repositories.uselessRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Api(value = "Useless API")
 public class uselessController {
     @Autowired
     private uselessRepository repository;
@@ -27,6 +30,7 @@ public class uselessController {
     }
 
     @GetMapping("/useless/{id}")
+    @ApiOperation(value = "Get useless", notes = "Retrieve an useless")
     public useless one(@PathVariable Integer id) {
         return repository.findById(id)
                 .orElseThrow(()->new RuntimeException("useless: "+ id +" not found."));
