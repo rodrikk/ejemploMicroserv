@@ -27,13 +27,13 @@ public class uselessController {
     }
 
     @GetMapping("/useless/{id}")
-    public useless one(@PathVariable String id) {
+    public useless one(@PathVariable Integer id) {
         return repository.findById(id)
                 .orElseThrow(()->new RuntimeException("useless: "+ id +" not found."));
     }
 
     @PutMapping("/useless/{id}")
-    useless replaceUseless(@RequestBody useless newuseless, @PathVariable String id) {
+    useless replaceUseless(@RequestBody useless newuseless, @PathVariable Integer id) {
 
         return repository.findById(id)
                 .map(useless -> {
@@ -50,7 +50,7 @@ public class uselessController {
     }
 
     @DeleteMapping("/useless/{id}")
-    void deleteUseless(@PathVariable String id) {
+    void deleteUseless(@PathVariable Integer id) {
         repository.deleteById(id);
     }
 }

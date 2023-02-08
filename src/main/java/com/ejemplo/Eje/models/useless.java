@@ -1,23 +1,34 @@
 package com.ejemplo.Eje.models;
 
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.Nullable;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-@Document(collection="moreUseless")
+@Entity
+@Table(name = "useless")
 @NoArgsConstructor
 public class useless {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     @Nullable
     private String howUseless, whyUseless;
 
     private boolean yes;
 
     private float usefulPercentage;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public useless(@Nullable String howUseless, @Nullable String whyUseless, boolean yes, float usefulPercentage) {
         this.howUseless = howUseless;
@@ -58,14 +69,6 @@ public class useless {
 
     public void setUsefulPercentage(float usefulPercentage) {
         this.usefulPercentage = usefulPercentage;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override
